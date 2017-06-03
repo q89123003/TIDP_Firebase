@@ -13,6 +13,6 @@ var functions = require('firebase-functions');
 
  exports.gps = functions.https.onRequest((request, response) => {
  	var lat = request.body.latitude;
- 	var lon = request.body.longtitude;
+ 	var lon = request.body.longitude;
  	response.send("Lat = " + lat);
  });

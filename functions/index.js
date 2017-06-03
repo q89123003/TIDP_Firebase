@@ -11,3 +11,8 @@ var functions = require('firebase-functions');
   response.send("Test Test from Firebase!");
  });
 
+ exports.gps = functions.https.onRequest((request, response) => {
+ 	var lat = request.body.latitude;
+ 	var lon = request.body.longtitude;
+ 	response.send("Lat = " + lat);
+ });

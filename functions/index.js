@@ -33,7 +33,7 @@ admin.initializeApp(functions.config().firebase)
  });
 
  exports.queryTest = functions.https.onRequest((request, response) => {
- 		var ref = firebase.database().ref("/test");
+ 		var ref = admin.database().ref("/test");
 		var query = ref.orderByChild("time").equalTo(100).on("child_added", function(snapshot) {
   			console.log(snapshot.key);
   			response.send(snapshot.key);

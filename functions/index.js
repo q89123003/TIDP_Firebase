@@ -23,7 +23,7 @@ admin.initializeApp(functions.config().firebase)
  	var time = 100
  	var userID = 92
 
- 	push_data = {userID: userID, time: time, latitude: lat, longitude: lon};
+ 	var push_data = {userID: userID, time: time, latitude: lat, longitude: lon};
   	// [START adminSdkPush]
   	// Push the new message into the Realtime Database using the Firebase Admin SDK.
   	admin.database().ref('/test').push(push_data).then(snapshot => {

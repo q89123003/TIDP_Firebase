@@ -33,9 +33,20 @@ admin.initializeApp(functions.config().firebase)
  });
 
  exports.queryTest = functions.https.onRequest((request, response) => {
+
  		var ref = admin.database().ref("/test");
-		var query = ref.orderByChild("time").equalTo(100).on("child_added", function(snapshot) {
-  			console.log(snapshot.key);
-  			response.send(snapshot.key);
+		var query = ref.orderByChild("time").equalTo(100);
+		query.once("value")
+		  .then(function(snapshot) {
+		  	 	var responseStr;
+		    snapshot.forEach(function(childSnapshot) {
+		      // key will be "ada" the first time and "alan" the second time
+		      var key = childSnapshot.key;
+		      responseStr = responseStr + key;
+		      
+			});
+		    response.send(responseStr);
 		});
+		
+
  });

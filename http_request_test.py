@@ -1,7 +1,7 @@
 import requests
 import json
 
-testMode = 2
+testMode = 1
 
 if testMode == 1:
 	url = 'https://us-central1-tidp-fusionnext.cloudfunctions.net/gps'

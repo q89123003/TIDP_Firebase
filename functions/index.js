@@ -28,25 +28,38 @@ admin.initializeApp(functions.config().firebase)
   	// Push the new message into the Realtime Database using the Firebase Admin SDK.
   	admin.database().ref('/test').push(push_data).then(snapshot => {
     // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-    		res.redirect(303, snapshot.ref);
+    		//res.redirect(303, snapshot.ref);
 		});
  });
 
  exports.queryTest = functions.https.onRequest((request, response) => {
 
- 		var ref = admin.database().ref("/test");
-		var query = ref.orderByChild("time").equalTo(100);
-		query.once("value")
-		  .then(function(snapshot) {
-		  	 	var responseStr;
-		    snapshot.forEach(function(childSnapshot) {
-		      // key will be "ada" the first time and "alan" the second time
-		      var key = childSnapshot.key;
-		      responseStr = responseStr + key;
-		      
-			});
-		    response.send(responseStr);
+	var ref = admin.database().ref("/test");
+	var query = ref.orderByChild("time").equalTo(100);
+	query.once("value")
+	  .then(function(snapshot) {
+	  	 	var responseStr;
+	    snapshot.forEach(function(childSnapshot) {
+	      // key will be "ada" the first time and "alan" the second time
+	      var key = childSnapshot.key;
+	      responseStr = responseStr + key;
+	      
 		});
+	    response.send(responseStr);
+	});
 		
+
+ });
+
+//for user to upload message token
+ exports.token = functions.https.onRequest((request, response) => {
+
+ 	var ID = request.body.ID;
+ 	var token = request.body.token;
+
+ 	console.log('ID: ' + ID);
+ 	console.log('token: ' + token);
+
+ 	response.send(token);
 
  });

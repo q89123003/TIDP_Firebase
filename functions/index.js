@@ -63,3 +63,35 @@ admin.initializeApp(functions.config().firebase)
  	response.send(token);
 
  });
+
+ exporst.msgTest = functions.https.onRequest((request, response)) => {
+ 	var token = request.body.token;
+
+ 	// This registration token comes from the client FCM SDKs.
+	var registrationToken = token;
+
+	// See the "Defining the message payload" section below for details
+	// on how to define a message payload.
+	var payload = {
+	  data: {
+	    score: "850",
+	    time: "2:45"
+	  }
+	};
+
+	// Send a message to the device corresponding to the provided
+	// registration token.
+	admin.messaging().sendToDevice(registrationToken, payload)
+	  .then(function(res) {
+	    // See the MessagingDevicesResponse reference documentation for
+	    // the contents of response.
+	    console.log("Successfully sent message:", res);
+	    response.send("Successfully sent message:", res);
+	  })
+	  .catch(function(error) {
+	    console.log("Error sending message:", error);
+	    response.send("Error sending message:", error);
+	  });
+
+
+ }

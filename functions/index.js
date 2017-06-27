@@ -64,7 +64,7 @@ admin.initializeApp(functions.config().firebase)
 
  });
 
- exporst.msgTest = functions.https.onRequest((request, response)) => {
+ exports.msgTest = functions.https.onRequest((request, response) => {
  	var token = request.body.token;
 
  	// This registration token comes from the client FCM SDKs.
@@ -86,12 +86,11 @@ admin.initializeApp(functions.config().firebase)
 	    // See the MessagingDevicesResponse reference documentation for
 	    // the contents of response.
 	    console.log("Successfully sent message:", res);
-	    response.send("Successfully sent message:", res);
+	    response.send("Successfully sent message");
 	  })
 	  .catch(function(error) {
 	    console.log("Error sending message:", error);
-	    response.send("Error sending message:", error);
+	    response.send("Error sending message");
 	  });
 
-
- }
+});
